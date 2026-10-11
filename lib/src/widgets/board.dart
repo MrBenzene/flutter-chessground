@@ -52,6 +52,7 @@ class Chessboard extends StatefulWidget with ChessboardGeometry {
     this.onTouchedSquare,
     this.shapes = const {},
     this.annotations = const {},
+    this.squareHighlights = const {},
   }) : _size = size;
 
   final double _size;
@@ -85,6 +86,9 @@ class Chessboard extends StatefulWidget with ChessboardGeometry {
 
   /// Move annotations to be displayed on the board.
   final Map<Square, Annotation> annotations;
+
+  /// Custom square highlights, painted under the pieces.
+  final Map<Square, HighlightDetails> squareHighlights;
 
   /// Whether the pieces can be moved by one side or both.
   bool get interactive => controller.interactive;
@@ -208,7 +212,7 @@ class _BoardState extends State<Chessboard> with TickerProviderStateMixin {
       lastMoveDetails: colorScheme.lastMove,
       selectedDetails: colorScheme.selected,
       validMoveColor: colorScheme.validMoves,
-      squareHighlights: const {},
+      squareHighlights: widget.squareHighlights,
       highlightImagesLoaded: _highlightImagesLoaded,
     );
 
